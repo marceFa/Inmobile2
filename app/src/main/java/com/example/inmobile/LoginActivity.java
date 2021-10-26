@@ -25,8 +25,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.inmobile.request.ApiClient;
 
 public class LoginActivity extends AppCompatActivity implements SensorEventListener {
-    private EditText etUsuario;
-    private EditText etContraseña;
+    private EditText etMail;
+    private EditText etClave;
     private Button btLogin;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
@@ -60,8 +60,15 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
                 Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
             }
         });
-        etUsuario = findViewById(R.id.etUsuario);
-        etContraseña = findViewById(R.id.etContraseña);
+        viewModel.getLoginMutable().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(i);
+            }
+        });
+        etMail = findViewById(R.id.etMail);
+        etClave = findViewById(R.id.etClave);
         btLogin = findViewById(R.id.btLogin);
         Log.d("Salida", btLogin.toString());
         btLogin.setOnClickListener(new View.OnClickListener() {
@@ -75,9 +82,9 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
     public void login(View view) {
 
 
-        String mail = etUsuario.getText().toString();
-        String password = etContraseña.getText().toString();
-        viewModel.autenticar(mail, password);
+        String email = etMail.getText().toString();
+        String clave = etClave.getText().toString();
+        viewModel.autenticar(email, clave);
 
     }
     @Override

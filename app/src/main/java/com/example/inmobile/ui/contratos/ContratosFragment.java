@@ -2,6 +2,7 @@ package com.example.inmobile.ui.contratos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContratosFragment extends Fragment {
     private ContratosViewModel contratosViewModel;
@@ -35,12 +38,13 @@ public class ContratosFragment extends Fragment {
     }
 
     private void inicializar(View view) {
+
         contratosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getActivity().getApplication()).create(ContratosViewModel.class);
         rvInmuebles = view.findViewById(R.id.rvInmuebles);
-        contratosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+        contratosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Contrato>>() {
             @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
-                adapter = new InmuebleConContratoAdapter(context, inmuebles, getLayoutInflater());
+            public void onChanged(List<Contrato> contratos) {
+                adapter = new InmuebleConContratoAdapter(context, contratos, getLayoutInflater());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2, RecyclerView.VERTICAL, false);
                 rvInmuebles.setLayoutManager(gridLayoutManager);
                 rvInmuebles.setAdapter(adapter);

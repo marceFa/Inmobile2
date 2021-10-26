@@ -39,6 +39,9 @@ public class InmuebleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        int id= getArguments().getInt("id");
+        
         View root = inflater.inflate(R.layout.inmueble_fragment, container, false);
         inicializar(root);
         return root;
@@ -53,6 +56,7 @@ public class InmuebleFragment extends Fragment {
         tvPrecio = view.findViewById(R.id.tvPrecio);
         cbEstado = view.findViewById(R.id.cbEstado);
         ivImagenInmueble = view.findViewById(R.id.ivImagenInmueble);
+        int id =getArguments().getInt("id");
         inmuebleViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmuebleViewModel.class);
         inmuebleViewModel.getInmueble().observe(getActivity(), new Observer<Inmueble>() {
             @Override
@@ -63,12 +67,12 @@ public class InmuebleFragment extends Fragment {
                 tvUso.setText(inmueble.getUso());
                 tvAmbientes.setText(inmueble.getAmbientes() + "");
                 tvPrecio.setText("$" + inmueble.getPrecio());
-                cbEstado.setChecked(inmueble.isEstado());
+                cbEstado.setChecked(inmueble.isDisponible());
                 cbEstado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        inmueble.setEstado(cbEstado.isChecked());
-                        inmuebleViewModel.actualizarDatosInmueble(inmueble);
+                        inmueble.setDisponible(cbEstado.isChecked());
+                        inmuebleViewModel.modificarrDisponible(id);
                     }
                 });
 
@@ -80,7 +84,7 @@ public class InmuebleFragment extends Fragment {
             }
         });
 
-        inmuebleViewModel.cargarInmueble(getArguments());
+        inmuebleViewModel.cargarInmueble(id);
     }
 
 }

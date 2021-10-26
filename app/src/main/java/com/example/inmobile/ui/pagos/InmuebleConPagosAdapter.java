@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Pago;
 
@@ -27,14 +28,14 @@ import java.util.List;
 
 public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPagosAdapter.ViewHolder>{
     private Context context;
-    private List<Inmueble> inmuebles;
+    private List<Contrato> contratos;
     private LayoutInflater inflater;
 
 
 
-    public InmuebleConPagosAdapter(Context context, List<Inmueble> inmuebles, LayoutInflater inflater) {
+    public InmuebleConPagosAdapter(Context context, List<Contrato> contratos, LayoutInflater inflater) {
         this.context = context;
-        this.inmuebles = inmuebles;
+        this.contratos = contratos;
         this.inflater = inflater;
     }
     @NonNull
@@ -46,17 +47,18 @@ public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPag
 
     @Override
     public void onBindViewHolder(@NonNull InmuebleConPagosAdapter.ViewHolder holder, int position) {
-        holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
+        holder.tvDireccion.setText(contratos.get(position).getInmueble().getDireccion());
 
         Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .load(contratos.get(position).getInmueble().getImagen())
+                //.diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.inmu2)
                 .into(holder.ivImagenInmueble);
     }
 
     @Override
     public int getItemCount() {
-        return inmuebles.size();
+        return contratos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,8 +74,9 @@ public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPag
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    Inmueble inmueble = inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
+                    Contrato contrato = contratos.get(getAdapterPosition());
+                    //bundle.putSerializable("inmueble", inmueble);
+                    bundle.putInt("id", contrato.getIdContrato());
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.pagoFragment, bundle);
                 }
             });

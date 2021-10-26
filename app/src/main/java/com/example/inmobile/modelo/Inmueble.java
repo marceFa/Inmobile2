@@ -13,10 +13,10 @@ public class Inmueble implements Serializable {
     private double precio;
     private Propietario propietario;
     //En falso significa que el innmueble no está disponible por alguna falla en el mismo.
-    private boolean estado=true;
+    private boolean disponible=true;
     private String imagen;
 
-    public Inmueble(int idInmueble, String direccion, String uso, String tipo, int ambientes, double precio, Propietario propietario, boolean estado, String imagen) {
+    public Inmueble(int idInmueble, String direccion, String uso, String tipo, int ambientes, double precio, Propietario propietario, boolean disponible, String imagen) {
         this.idInmueble = idInmueble;
         this.direccion = direccion;
         this.uso = uso;
@@ -24,7 +24,7 @@ public class Inmueble implements Serializable {
         this.ambientes = ambientes;
         this.precio = precio;
         this.propietario = propietario;
-        this.estado = estado;
+        this.disponible = disponible;
         this.imagen = imagen;
     }
     public Inmueble() {
@@ -86,12 +86,12 @@ public class Inmueble implements Serializable {
         this.propietario = propietario;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isDisponible() {
+        return disponible;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     public String getImagen() {

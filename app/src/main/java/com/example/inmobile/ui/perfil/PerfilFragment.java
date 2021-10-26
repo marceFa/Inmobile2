@@ -1,8 +1,10 @@
 package com.example.inmobile.ui.perfil;
 
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +23,9 @@ import com.example.inmobile.R;
 public class PerfilFragment extends Fragment {
 
     private PerfilViewModel perfilViewModel;
-    private EditText etId,etDNI,etNombre,etApellido,etEmail,etContraseña,etTelefono;
+    private EditText etId,etDNI,etNombre,etApellido,etEmail,etClave,etTelefono;
     private Button btEditar,btGuardar;
+    Propietario propietario;
 
 
 
@@ -34,42 +37,28 @@ public class PerfilFragment extends Fragment {
         View vistaPerfil= inflater.inflate(R.layout.perfil_fragment, container, false);
         inicializar(vistaPerfil);
 
-        //observer del mutable Mensaje
-        perfilViewModel.getMensajeMutable().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String mensaje) {
-
-                AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());//pasar el contexto
-                dialogo.setTitle("Atención");
-                dialogo.setMessage(mensaje);
-                dialogo.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });dialogo.show();
-            }
-        });
 
 
         //observer del mutable Propietario
         perfilViewModel.getPropietarioMutable().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
 
+
+
             @Override
             public void onChanged(Propietario propietario) {
 
-                etId.setText(" "+propietario.getId());
-                etDNI.setText(propietario.getDni().toString());
+                etId.setText(propietario.getId()+"");
+                etDNI.setText(propietario.getDni());
                 etNombre.setText(propietario.getNombre());
                 etApellido.setText(propietario.getApellido());
                 etEmail.setText(propietario.getEmail());
                 etTelefono.setText(propietario.getTelefono());
-                etContraseña.setText(propietario.getContraseña());
+                etClave.setText(propietario.getClave());
 
             }
         });
-        perfilViewModel.obtenerDatos();
-        return vistaPerfil;
+       perfilViewModel.cargarPerfil();
+       return vistaPerfil;
     }
 
     private void habilitarEditex(){
@@ -77,7 +66,7 @@ public class PerfilFragment extends Fragment {
         etNombre.setEnabled(true);
         etApellido.setEnabled(true);
         etEmail.setEnabled(true);
-        etContraseña.setEnabled(true);
+        etClave.setEnabled(true);
         etTelefono.setEnabled(true);
 
     }
@@ -86,7 +75,7 @@ public class PerfilFragment extends Fragment {
         etNombre.setEnabled(false);
         etApellido.setEnabled(false);
         etEmail.setEnabled(false);
-        etContraseña.setEnabled(false);
+        etClave.setEnabled(false);
         etTelefono.setEnabled(false);
     }
 
@@ -96,7 +85,7 @@ public class PerfilFragment extends Fragment {
         etNombre = vistaPerfil.findViewById(R.id.tvNombre);
         etApellido = vistaPerfil.findViewById(R.id.tvApellido);
         etEmail = vistaPerfil.findViewById(R.id.tvEmail);
-        etContraseña = vistaPerfil.findViewById(R.id.etContraseña);
+        etClave = vistaPerfil.findViewById(R.id.etClave);
         etTelefono = vistaPerfil.findViewById(R.id.tvTelefono);
         btEditar = vistaPerfil.findViewById(R.id.btEditar);
         btGuardar= vistaPerfil.findViewById(R.id.btGuardar);
@@ -118,27 +107,40 @@ public class PerfilFragment extends Fragment {
             public void onClick(View view) {
                 btGuardar.setVisibility(View.INVISIBLE);
                 btEditar.setVisibility(View.VISIBLE);
-
-
-                perfilViewModel.editar(Integer.parseInt(etId.getText().toString().replaceAll(" ", "")), Long.valueOf(etDNI.getText().toString()), etNombre.getText().toString(),etApellido.getText().toString(),
-                        etEmail.getText().toString(),etContraseña.getText().toString(),etTelefono.getText().toString());
-
-                btEditar.setVisibility(View.VISIBLE);
-                btGuardar.setVisibility(View.INVISIBLE);
+                Propietario propietario = new Propietario();
+                propietario.setId(Integer.parseInt(etId.getText().toString()));
+                Log.d("idperfil","id="+propietario.getId());
+                propietario.setDni(etDNI.getText().toString());
+                propietario.setNombre(etNombre.getText().toString());
+                propietario.setApellido(etApellido.getText().toString());
+                propietario.setEmail(etEmail.getText().toString());
+                propietario.setClve(etClave.getText().toString());
+                propietario.setTelefono(etTelefono.getText().toString());
+                perfilViewModel.actualizarPerfil(propietario);
                 deshabilitarEditex();
             }
         });
-
-
-
-
-
-
-
-
     }
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

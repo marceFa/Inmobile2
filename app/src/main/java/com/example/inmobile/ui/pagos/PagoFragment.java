@@ -19,6 +19,7 @@ import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Pago;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PagoFragment extends Fragment {
 
@@ -41,17 +42,18 @@ public class PagoFragment extends Fragment {
     }
 
     private void inicializar(View view) {
+        int id =getArguments().getInt("id");
         pagoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagoViewModel.class);
         lvPagos = view.findViewById(R.id.lvPagos);
-        pagoViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
+        pagoViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<List<Pago>>() {
             @Override
-            public void onChanged(ArrayList<Pago> pagos) {
+            public void onChanged(List<Pago> pagos) {
 
                 PagoAdapter adapter = new PagoAdapter(context, R.layout.item_pago_fragment, pagos, getLayoutInflater());
                 lvPagos.setAdapter(adapter);
             }
         });
-        pagoViewModel.cargarPagos(getArguments());
+        pagoViewModel.cargarPagos(id);
 
     }
 

@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Pago;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PagosFragment extends Fragment {
 
@@ -40,12 +42,12 @@ public class PagosFragment extends Fragment {
     private void inicializar(View view) {
         pagosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagosViewModel.class);
         rvInmuebles = view.findViewById(R.id.rvInmuebles);
-        pagosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+        pagosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Contrato>>() {
             @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
-
+            public void onChanged(List<Contrato> contratos) {
+                adapter = new InmuebleConPagosAdapter(context, contratos, getLayoutInflater());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2, RecyclerView.VERTICAL, false);
-                adapter = new InmuebleConPagosAdapter(context, inmuebles, getLayoutInflater());
+
                 rvInmuebles.setLayoutManager(gridLayoutManager);
                 rvInmuebles.setAdapter(adapter);
             }

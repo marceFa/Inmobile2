@@ -18,10 +18,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContraseña" />
+        app:layout_constraintTop_toBottomOf="@+id/etClave" />
 
     <EditText
-        android:id="@+id/etContraseña"
+        android:id="@+id/etClave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/logininput"
@@ -34,10 +34,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/etMail" />
 
     <EditText
-        android:id="@+id/etUsuario"
+        android:id="@+id/etMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -48,7 +48,7 @@
         android:inputType="textPersonName"
         android:paddingStart="5dp"
         android:textColor="#1F4F55"
-        app:layout_constraintBottom_toTopOf="@+id/etContraseña"
+        app:layout_constraintBottom_toTopOf="@+id/etClave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/etUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/etMail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

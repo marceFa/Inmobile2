@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.inmobile.R;
 
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InquilinosFragment extends Fragment {
     private InquilinosViewModel inquilinosViewModel;

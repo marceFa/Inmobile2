@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Contrato extends ArrayList<Inmueble> implements Serializable {
+public class Contrato implements Serializable {
 
     private int idContrato;
     private String fechaInicio;
     private String fechaFin;
     private double montoAlquiler;
     private Inquilino inquilino;
-    private Inmueble inmueble;
+    private Inmueble inmuebles;
 
     public Contrato() {}
     public Contrato(int idContrato, String fechaInicio, String fechaFin, double montoAlquiler, Inquilino inquilino, Inmueble inmueble) {
@@ -20,7 +20,7 @@ public class Contrato extends ArrayList<Inmueble> implements Serializable {
         this.fechaFin = fechaFin;
         this.montoAlquiler = montoAlquiler;
         this.inquilino = inquilino;
-        this.inmueble = inmueble;
+        this.inmuebles = inmueble;
     }
 
     public int getIdContrato() {
@@ -65,11 +65,11 @@ public class Contrato extends ArrayList<Inmueble> implements Serializable {
     }
 
     public Inmueble getInmueble() {
-        return inmueble;
+        return inmuebles;
     }
 
     public void setInmueble(Inmueble inmueble) {
-        this.inmueble = inmueble;
+        this.inmuebles = inmueble;
     }
 
     @Override

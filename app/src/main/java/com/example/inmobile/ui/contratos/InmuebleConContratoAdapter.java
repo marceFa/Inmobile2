@@ -3,6 +3,7 @@ package com.example.inmobile.ui.contratos;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 
 import java.util.List;
 
 public class InmuebleConContratoAdapter extends RecyclerView.Adapter<InmuebleConContratoAdapter.ViewHolder> {
 
-    List<Inmueble> inmuebles;
+    List<Contrato> contratos;
     Context context;
     LayoutInflater inflater;
 
 
-    public InmuebleConContratoAdapter (Context context, List<Inmueble> inmuebles, LayoutInflater inflater) {
+    public InmuebleConContratoAdapter (Context context, List<Contrato> contratos, LayoutInflater inflater) {
         this.context = context;
-        this.inmuebles = inmuebles;
+        this.contratos = contratos;
         this.inflater = inflater;
     }
 
@@ -44,18 +46,23 @@ public class InmuebleConContratoAdapter extends RecyclerView.Adapter<InmuebleCon
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
+
+        holder.tvDireccion.setText(contratos.get(position).getInmueble().getDireccion());
+        Log.d("salida ",  contratos.get(position).getInmueble().getDireccion());
+
+
+        // String url= "http://192.168.0.7:45455";
 
         Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .load(contratos.get(position).getInmueble().getImagen())
+                .placeholder(R.drawable.inmu2)
+                //.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivImagenInmueble);
 
     }
 
     @Override
-    public int getItemCount() {
-        return inmuebles.size();
+    public int getItemCount() {return contratos.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDireccion;
@@ -70,8 +77,9 @@ public class InmuebleConContratoAdapter extends RecyclerView.Adapter<InmuebleCon
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    Inmueble inmueble = inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
+                    Contrato contrato = contratos.get(getAdapterPosition());
+                    bundle.putInt("id", contrato.getIdContrato());
+                    //bundle.putSerializable("id", contrato.getIdContrato());
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.contratoFragment, bundle);
                 }
             });

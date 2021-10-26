@@ -131,7 +131,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <EditText
-            android:id="@+id/etContraseña"
+            android:id="@+id/etClave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -230,10 +230,10 @@
             android:layout_height="wrap_content"
             android:text="Contraseña"
             android:textColor="#090909"
-            app:layout_constraintBottom_toTopOf="@+id/etContraseña"
-            app:layout_constraintEnd_toEndOf="@+id/etContraseña"
+            app:layout_constraintBottom_toTopOf="@+id/etClave"
+            app:layout_constraintEnd_toEndOf="@+id/etClave"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/etContraseña"
+            app:layout_constraintStart_toStartOf="@+id/etClave"
             app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
         <TextView
@@ -246,7 +246,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tvTelefono"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvTelefono"
-            app:layout_constraintTop_toBottomOf="@+id/etContraseña" />
+            app:layout_constraintTop_toBottomOf="@+id/etClave" />
 
         <TextView
             android:id="@+id/textView32"

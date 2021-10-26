@@ -43,15 +43,17 @@ public class InquilinoFragment extends Fragment {
         tvTelefono = view.findViewById(R.id.tvTelefono);
         tvGarante = view.findViewById(R.id.tvGarante);
         tvTelefonoGarante = view.findViewById(R.id.tvTelefonoGarante);
+        int id =getArguments().getInt("id");
 
         inquilinoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinoViewModel.class);
         inquilinoViewModel.getInquilino().observe(getViewLifecycleOwner(), new Observer<Inquilino>() {
             @Override
             public void onChanged(Inquilino inquilino) {
+
+                tvCodigo.setText(inquilino.getIdInquilino() + "");
                 tvNombre.setText(inquilino.getNombre());
                 tvApellido.setText(inquilino.getApellido());
-                tvCodigo.setText(inquilino.getIdInquilino() + "");
-                tvDNI.setText(inquilino.getDNI().toString()+"");
+                tvDNI.setText(inquilino.getDNI()+ "");
                 tvEmail.setText(inquilino.getEmail());
                 tvTelefono.setText(inquilino.getTelefono());
                 tvGarante.setText(inquilino.getNombreGarante());

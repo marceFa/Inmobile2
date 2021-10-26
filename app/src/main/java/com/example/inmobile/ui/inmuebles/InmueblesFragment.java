@@ -18,6 +18,7 @@ import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class InmueblesFragment extends Fragment {
@@ -38,9 +39,9 @@ public class InmueblesFragment extends Fragment {
     private void inicializar(View view) {
         rvInmuebles = view.findViewById(R.id.rvInmuebles);
         inmueblesViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmueblesViewModel.class);
-        inmueblesViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+        inmueblesViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
+            public void onChanged(List<Inmueble> inmuebles) {
                 GridLayoutManager gridLayoutManager= new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
                 rvInmuebles.setLayoutManager(gridLayoutManager);
                 adapter = new InmuebleAdapter(context, inmuebles, getLayoutInflater());

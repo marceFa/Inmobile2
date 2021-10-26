@@ -1,6 +1,8 @@
 package com.example.inmobile.ui.pagos;
 
 import android.content.Context;
+import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +11,27 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Pago;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PagoAdapter  extends ArrayAdapter<Pago> {
 
-    private ArrayList<Pago> pagos;
+    private List<Pago> pagos;
     private Context context;
     private LayoutInflater inflater;
+    private TextView tvCodigo, tvNumero,tvCodigoContrato,tvImporte,tvFecha;
 
 
-    public PagoAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Pago> objects, LayoutInflater inflater) {
+    public PagoAdapter(@NonNull Context context, int resource, @NonNull List<Pago> objects, LayoutInflater inflater) {
         super(context, resource, objects);
         this.context = context;
         this.pagos = objects;
@@ -32,6 +39,7 @@ public class PagoAdapter  extends ArrayAdapter<Pago> {
 
     }
 
+    @RequiresApi(api = VERSION_CODES.O)
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -49,7 +57,13 @@ public class PagoAdapter  extends ArrayAdapter<Pago> {
         tvNumero.setText(pagos.get(position).getNumero() + "");
         tvCodigoContrato.setText(pagos.get(position).getContrato().getIdContrato() + "");
         tvImporte.setText("$" + pagos.get(position).getImporte());
-        tvFecha.setText(pagos.get(position).getFechaDePago());
+
+        LocalDateTime fechaPago = LocalDateTime.parse(pagos.get(position).getFechaDePago());
+        LocalDate fechaPagoo = fechaPago.toLocalDate();
+        tvFecha.setText(fechaPagoo.toString());
+
+
+        //tvFecha.setText(pagos.get(position).getFechaDePago());
         return viewPago;
     }
 }

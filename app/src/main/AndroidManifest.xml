@@ -12,13 +12,14 @@
         android:label="Inmobile"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Inmobile">
+        android:theme="@style/Theme.Inmobile"
+        android:usesCleartextTraffic="true">
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDNliUta12A_tc-AQ_d81v2opp9lsE9NYA" />
+            android:value="AIzaSyCaj9BbWsT3ntcJpOr6r8uNc_3qWI-crXI" />
 
         <activity android:name=".LoginActivity">
 

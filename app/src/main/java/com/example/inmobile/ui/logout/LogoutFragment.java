@@ -34,8 +34,8 @@ public class LogoutFragment extends Fragment {
                 .setMessage("Está seguro/a  que desea cerrar la sesión :( ????")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        System.exit(0);
+                    public void onClick(DialogInterface dialogInterface, int i) { System.exit(0);
+
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

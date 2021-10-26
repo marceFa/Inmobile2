@@ -33,14 +33,15 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-
-        // Pasando cada ID de menú como un conjunto de ID porque cada
+        //Crea un nuevo Builder con un conj de dstinos de nivel superios
+        //El boton de retroceso no se mostrara cdo se encuentre en estos destinos
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.mapaInicioFragment,
                 R.id.perfilFragment, R.id.inmueblesFragment, R.id.inquilinosFragment,
                 R.id.contratosFragment, R.id.pagosFragment, R.id.logoutFragment)
                 .setDrawerLayout(drawer)
                 .build();
+        //Es el objeto que administra la navegacion de la app a traves del nasHost, controla  al navHost
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Se llama a este metodo cdo el usuario quiere navegar hacia arriba dentro de la jerarquia de act
+    //de su app desde la barra de accion
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

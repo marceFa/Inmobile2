@@ -47,7 +47,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
         Glide.with(context)
                 .load(inmuebles.get(position).getImagen())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.inmu2)
                 .into(holder.ivImagenInmueble);
 
 
@@ -72,7 +72,8 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
                     Inmueble inmueble = inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
+                    //bundle.putSerializable("inmueble", inmueble);
+                    bundle.putInt("id", inmueble.getIdInmueble());
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.inmuebleFragment, bundle);
                 }
             });
