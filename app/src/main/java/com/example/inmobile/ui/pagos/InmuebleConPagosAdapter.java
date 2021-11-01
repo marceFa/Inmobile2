@@ -21,6 +21,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.modelo.Inquilino;
 import com.example.inmobile.modelo.Pago;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPag
         Glide.with(context)
                 .load(contratos.get(position).getInmueble().getImagen())
                 //.diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.inmu2)
+                .placeholder(R.drawable.inmu4)
                 .into(holder.ivImagenInmueble);
     }
 
@@ -75,7 +76,7 @@ public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPag
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
                     Contrato contrato = contratos.get(getAdapterPosition());
-                    //bundle.putSerializable("inmueble", inmueble);
+                    //bundle.putSerializable("Contrato", contrato);
                     bundle.putInt("id", contrato.getIdContrato());
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.pagoFragment, bundle);
                 }

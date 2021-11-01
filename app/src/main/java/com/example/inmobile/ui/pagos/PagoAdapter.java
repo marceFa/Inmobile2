@@ -20,6 +20,7 @@ import com.example.inmobile.modelo.Pago;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,12 +59,13 @@ public class PagoAdapter  extends ArrayAdapter<Pago> {
         tvCodigoContrato.setText(pagos.get(position).getContrato().getIdContrato() + "");
         tvImporte.setText("$" + pagos.get(position).getImporte());
 
-        LocalDateTime fechaPago = LocalDateTime.parse(pagos.get(position).getFechaDePago());
-        LocalDate fechaPagoo = fechaPago.toLocalDate();
-        tvFecha.setText(fechaPagoo.toString());
+        DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDate fechaPago=LocalDate.parse(pagos.get(position).getFechaDePago(), dt);
 
 
-        //tvFecha.setText(pagos.get(position).getFechaDePago());
+        tvFecha.setText(fechaPago.toString());
+
+
         return viewPago;
     }
 }

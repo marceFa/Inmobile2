@@ -38,7 +38,6 @@ public class ContratosFragment extends Fragment {
     }
 
     private void inicializar(View view) {
-
         contratosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getActivity().getApplication()).create(ContratosViewModel.class);
         rvInmuebles = view.findViewById(R.id.rvInmuebles);
         contratosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Contrato>>() {
@@ -53,3 +52,6 @@ public class ContratosFragment extends Fragment {
         contratosViewModel.cargarInmueblesConContrato();
     }
 }
+
+
+

@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/tvFechaInicio"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="#0421BF"
@@ -108,7 +108,7 @@
             android:id="@+id/tvInquilino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text=" "
             android:textColor="#0421BF"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -172,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="end"
-            app:constraint_referenced_ids="tvCodigoContrato,textView26,tvFechaInicio,tvFechaFin,textView27,textView14"
+            app:constraint_referenced_ids="tvCodigoContrato,textView26,tvFechaInicio,tvFechaFin,textView27,textView14,tvInquilino"
             tools:layout_editor_absoluteX="411dp" />
 
         <androidx.constraintlayout.widget.Guideline

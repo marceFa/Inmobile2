@@ -43,8 +43,8 @@ public class PagosViewModel  extends AndroidViewModel{
     //Acá hacemos una consulta a la ApiClient para traer los inmuebles con un contrato y sus pagos
 
     public void cargarInmueblesConPagos() {
-        Call<List<Contrato>> respuestaToken = ApiClient.getMyApiClient().inmueblesConContrato(ApiClient.obtenerToken(context));
-        respuestaToken.enqueue(new Callback<List<Contrato>>() {
+        Call<List<Contrato>> pagosxcontrato = ApiClient.getMyApiClient().contratosVigentes(ApiClient.obtenerToken(context));
+        pagosxcontrato.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
                 if(response.isSuccessful()){

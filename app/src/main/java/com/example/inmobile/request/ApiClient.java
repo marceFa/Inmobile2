@@ -226,15 +226,9 @@ public Propietario login(String mail, final String clave){
         Call<Inmueble>modificarDisponible(@Header("Authorization") String token,@Path("id") int id);
 
         //Contratos
-        @GET("Contratos/inmueblesConContrato")
-        Call<List<Contrato>>inmueblesConContrato(@Header("Authorization")String token);
+        @GET("Contratos/Vigentes")
+        Call<List<Contrato>>contratosVigentes(@Header("Authorization")String token);
 
-        @GET("Contratos/inmueble/{id}")
-        Call<Contrato>obtenerContratoPorId(@Path("id") int id, @Header("Authorization")String token);
-
-        //Inquilinos Actuales
-        @GET("Inquilinos")
-        Call<List<Contrato>> obtenerInquilinos(@Header("Authorization") String token );
 
         //Pagos
         @GET("Pago/{id}")

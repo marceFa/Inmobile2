@@ -17,10 +17,10 @@ import com.example.inmobile.modelo.Inquilino;
 public class InquilinoFragment extends Fragment {
 
     private InquilinoViewModel inquilinoViewModel;
+    private TextView tvCodigo;
     private TextView tvNombre;
     private TextView tvApellido;
     private TextView tvDNI;
-    private TextView tvCodigo;
     private TextView tvEmail;
     private TextView tvTelefono;
     private TextView tvGarante;
@@ -35,15 +35,15 @@ public class InquilinoFragment extends Fragment {
 }
 
     public void inicializar(View view) {
+        tvCodigo = view.findViewById(R.id.tvCodigo);
         tvNombre = view.findViewById(R.id.tvNombre);
         tvApellido = view.findViewById(R.id.tvApellido);
-        tvCodigo = view.findViewById(R.id.tvCodigo);
         tvDNI = view.findViewById(R.id.tvDNI);
         tvEmail = view.findViewById(R.id.tvEmail);
         tvTelefono = view.findViewById(R.id.tvTelefono);
         tvGarante = view.findViewById(R.id.tvGarante);
         tvTelefonoGarante = view.findViewById(R.id.tvTelefonoGarante);
-        int id =getArguments().getInt("id");
+
 
         inquilinoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinoViewModel.class);
         inquilinoViewModel.getInquilino().observe(getViewLifecycleOwner(), new Observer<Inquilino>() {

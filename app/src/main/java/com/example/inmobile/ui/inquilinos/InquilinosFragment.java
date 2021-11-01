@@ -42,10 +42,10 @@ public class InquilinosFragment extends Fragment {
     private void inicializar(View view) {
         inquilinosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getActivity().getApplication()).create(InquilinosViewModel.class);
         rvInquilinos = view.findViewById(R.id.rvInquilinos);
-        inquilinosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+        inquilinosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Contrato>>() {
             @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
-                adapter = new InmuebleConInquilinoAdapter(context, inmuebles, getLayoutInflater());
+            public void onChanged(List<Contrato> contratos) {
+                adapter = new InmuebleConInquilinoAdapter(context, contratos, getLayoutInflater());
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2, RecyclerView.VERTICAL, false);
                 rvInquilinos.setAdapter(adapter);
                 rvInquilinos.setLayoutManager(gridLayoutManager);

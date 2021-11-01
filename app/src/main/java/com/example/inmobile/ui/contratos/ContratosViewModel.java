@@ -44,11 +44,12 @@ public class ContratosViewModel extends AndroidViewModel {
     //Acá traemos los inmuebles que tienen contratos vigentes en la ApiClient
     public void cargarInmueblesConContrato() {
 
-        Call<List<Contrato>> inmueblesConContratoV = ApiClient.getMyApiClient().inmueblesConContrato(ApiClient.obtenerToken(context));
+        Call<List<Contrato>> inmueblesConContratoV = ApiClient.getMyApiClient().contratosVigentes(ApiClient.obtenerToken(context));
         inmueblesConContratoV.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
                 if(response.isSuccessful()){
+
                     ArrayList<Inmueble> inmuebles = new ArrayList<>();
                     Log.d("salida",response.body().get(0).getIdContrato()+"");
                     for(Contrato c: response.body()){

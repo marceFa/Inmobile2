@@ -16,6 +16,9 @@ import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.request.ApiClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,26 +43,12 @@ public class ContratoViewModel extends AndroidViewModel {
     }
 
     //aca recibimos un inmueble y se busca el contrato vigente
-    public void cargarContrato(int id) {
-        Log.d("idContrato","id:"+id);
-        Call<Contrato> contratoSeleccionado = ApiClient.getMyApiClient().obtenerContratoPorId(id, ApiClient.obtenerToken(context));
-        contratoSeleccionado.enqueue(new Callback<Contrato>() {
-            @Override
-            public void onResponse(Call<Contrato> call, Response<Contrato> response) {
-                if(response.isSuccessful()) {
-                    contratoMutable.postValue(response.body());
-                }
-                else
-                    Toast.makeText(context, "El Contrato no se ha encontrado!", Toast.LENGTH_SHORT).show();
+    public void cargarContrato(Bundle arguments) {
+        Contrato contrato= (Contrato) arguments.getSerializable("Contrato");
+        this.contratoMutable.setValue(contrato);
 
-            }
 
-            @Override
-            public void onFailure(Call<Contrato> call, Throwable t) {
-                Log.d("contrato","ERROR"+t.getMessage());
-                Toast.makeText(context, "Inesperadamente  a ocurrido un ERROR ", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         //Inmueble inmueble = (Inmueble) bundle.get("inmueble");
         //ApiClient apiClient= ApiClient.getApi();
         //Contrato contrato= apiClient.obtenerContratoVigente(inmueble);

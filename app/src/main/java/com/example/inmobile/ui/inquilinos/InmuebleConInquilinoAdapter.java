@@ -24,13 +24,13 @@ import java.util.List;
 
 public class InmuebleConInquilinoAdapter extends RecyclerView.Adapter<InmuebleConInquilinoAdapter.ViewHolder> {
 
-    List<Inmueble> inmuebles;
+    List<Contrato> contratos;
     Context context;
     LayoutInflater inflater;
 
-    public InmuebleConInquilinoAdapter(Context context, List<Inmueble> inmuebles, LayoutInflater inflater) {
+    public InmuebleConInquilinoAdapter(Context context, List<Contrato> contratos, LayoutInflater inflater) {
         this.context = context;
-        this.inmuebles = inmuebles;
+        this.contratos = contratos;
         this.inflater = inflater;
     }
     @NonNull
@@ -42,18 +42,19 @@ public class InmuebleConInquilinoAdapter extends RecyclerView.Adapter<InmuebleCo
 
     @Override
     public void onBindViewHolder(@NonNull InmuebleConInquilinoAdapter.ViewHolder holder, int position) {
-        holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
+        holder.tvDireccion.setText(contratos.get(position).getInmueble().getDireccion());
 
         Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .load(contratos.get(position).getInmueble().getImagen())
+                //.diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.inmu3)
                 .into(holder.ivImagenInmueble);
 
     }
 
     @Override
     public int getItemCount() {
-        return inmuebles.size();
+        return contratos.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDireccion;
@@ -68,8 +69,10 @@ public class InmuebleConInquilinoAdapter extends RecyclerView.Adapter<InmuebleCo
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    Inmueble inmueble = inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
+                    Contrato contrato = contratos.get(getAdapterPosition());
+                    bundle.putSerializable("Contrato", contrato);
+                    //bundle.putSerializable("Inquilino", contrato);
+
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.inquilinoFragment, bundle);
                 }
             });

@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
@@ -44,6 +45,7 @@ public class ContratoFragment extends Fragment {
         View root = inflater.inflate(R.layout.contrato_fragment, container, false);
         context = root.getContext();
         inicializar(root);
+
         return root;
     }
 
@@ -54,7 +56,7 @@ public class ContratoFragment extends Fragment {
         tvMontoAlquiler = view.findViewById(R.id.tvMontoAqluiler);
         tvInquilino = view.findViewById(R.id.tvInquilino);
         tvInmueble = view.findViewById(R.id.tvInmueble);
-        int id =getArguments().getInt("id");
+
         contratoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratoViewModel.class);
         contratoViewModel.getContrato().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
 
@@ -63,28 +65,31 @@ public class ContratoFragment extends Fragment {
             @Override
             public void onChanged(Contrato contrato) {
 
-                tvCodigoContrato.setText(contrato.getIdContrato() + "");
+                tvCodigoContrato.setText(contrato.getIdContrato() + " ");
                 //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-                LocalDateTime formatoSalida= LocalDateTime.parse(contrato.getFechaInicio());
-                LocalDate formatoEntrada= formatoSalida.toLocalDate();
-                tvFechaInicio.setText(formatoEntrada.toString());
+                DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+                LocalDate ld=LocalDate.parse(contrato.getFechaInicio(), dt);
 
-                LocalDateTime fc = LocalDateTime.parse(contrato.getFechaFin());
-                LocalDate hhh = fc.toLocalDate();
-                tvFechaFin.setText(hhh.toString());
+                tvFechaInicio.setText(ld.toString());
 
 
+
+                LocalDate ld2=LocalDate.parse(contrato.getFechaFin(), dt);
+                tvFechaFin.setText(ld2.toString());
 
                 tvMontoAlquiler.setText("$" + contrato.getMontoAlquiler());
-                tvInquilino.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());
+                //tvInquilino.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());
                 tvInmueble.setText("Domicilio:  " + contrato.getInmueble().getDireccion());
+
+
 
             }
 
     });
+        contratoViewModel.cargarContrato(getArguments());
 
-        contratoViewModel.cargarContrato(id);
+
 
 
 
