@@ -39,12 +39,12 @@ public class InquilinoViewModel extends AndroidViewModel {
     ////Acá recibimos un inmueble  y buscamos en la ApiClient el contrato vigente de ese inmueble y su inquilino
     public void cargarInquilino(int id) {
         Log.d("id","el id"+id);
-        Call<Inquilino> respuestaToken = ApiClient.getMyApiClient().inquilinoPorContrato(id, ApiClient.obtenerToken(context));
-        respuestaToken.enqueue(new Callback<Inquilino>() {
+        Call<Contrato> respuestaToken = ApiClient.getMyApiClient().inquilinoPorContrato(id, ApiClient.obtenerToken(context));
+        respuestaToken.enqueue(new Callback<Contrato>() {
             @Override
-            public void onResponse(Call<Inquilino> call, Response<Inquilino> response) {
+            public void onResponse(Call<Contrato> call, Response<Contrato> response) {
                 if(response.isSuccessful()){
-                    inquilinoMutable.postValue(response.body());
+                    inquilinoMutable.postValue(response.body().getInquilino());
                 }
                 else{
                     Log.d("response","error: "+response.message());
@@ -53,7 +53,7 @@ public class InquilinoViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Inquilino> call, Throwable t) {
+            public void onFailure(Call<Contrato> call, Throwable t) {
                 Log.d("inquilino","error: "+t.getMessage());
                 Toast.makeText(context, "Ocurrio un error", Toast.LENGTH_SHORT).show();
             }

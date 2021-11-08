@@ -229,11 +229,10 @@ public Propietario login(String mail, final String clave){
         @GET("Contratos/Vigentes")
         Call<List<Contrato>>contratosVigentes(@Header("Authorization")String token);
 
-        //INQUILINOS VER SI LOS PUEDO MOSTRAR SINO SACARLO
         @GET("Contratos/vigente/{id}")
-        Call<Inquilino>inquilinoPorContrato(@Path("id") int id, @Header("Authorization") String token);
+        Call<Contrato>inquilinoPorContrato(@Path("id") int id, @Header("Authorization") String token);
 
-        //Pagos     MUESTRA VACIO EL DETALLE
+        //Pagos
         @GET("Pago/{id}")
         Call<List<Pago>>pagosPorcontrato(@Path("id") int id, @Header("Authorization") String token);
 

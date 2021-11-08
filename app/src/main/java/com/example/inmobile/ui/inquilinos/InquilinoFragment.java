@@ -57,7 +57,7 @@ public class InquilinoFragment extends Fragment {
                 tvCodigo.setText(inquilino.getIdInquilino() + "");
                 tvNombre.setText(inquilino.getNombre());
                 tvApellido.setText(inquilino.getApellido());
-                tvDNI.setText(inquilino.getDNI() + "");
+                tvDNI.setText(inquilino.getdni() + "");
                 tvTelefono.setText(inquilino.getTelefono() + "");
                 tvEmail.setText(inquilino.getLugarDeTrabajo());
                 tvGarante.setText(inquilino.getNombreGarante());
