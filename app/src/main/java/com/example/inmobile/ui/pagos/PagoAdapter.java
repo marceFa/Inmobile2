@@ -56,7 +56,7 @@ public class PagoAdapter  extends ArrayAdapter<Pago> {
 
         tvCodigo.setText(pagos.get(position).getIdPago() + "");
         tvNumero.setText(pagos.get(position).getNumero() + "");
-        tvCodigoContrato.setText(pagos.get(position).getContrato().getIdContrato() + "");
+        //tvCodigoContrato.setText(pagos.get(position).getContrato().getIdContrato() + "");
         tvImporte.setText("$" + pagos.get(position).getImporte());
 
         DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");

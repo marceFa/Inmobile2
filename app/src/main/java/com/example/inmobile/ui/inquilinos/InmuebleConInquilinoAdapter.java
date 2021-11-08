@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.modelo.Inquilino;
 
 import java.util.List;
 
@@ -69,9 +70,9 @@ public class InmuebleConInquilinoAdapter extends RecyclerView.Adapter<InmuebleCo
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    Contrato contrato = contratos.get(getAdapterPosition());
-                    bundle.putSerializable("Contrato", contrato);
-                    //bundle.putSerializable("Inquilino", contrato);
+                    Contrato contrato= contratos.get(getAdapterPosition());
+                    //bundle.putSerializable("Contrato", contrato);
+                    bundle.putInt("id", contrato.getIdContrato());
 
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.inquilinoFragment, bundle);
                 }

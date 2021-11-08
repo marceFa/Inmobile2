@@ -39,6 +39,7 @@ public class ContratoFragment extends Fragment {
     private TextView tvInmueble;
     private Context context;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class ContratoFragment extends Fragment {
         return root;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void inicializar(View view) {
         tvCodigoContrato = view.findViewById(R.id.tvCodigoContrato);
         tvFechaInicio = view.findViewById(R.id.tvFechaInicio);
@@ -68,15 +70,16 @@ public class ContratoFragment extends Fragment {
                 tvCodigoContrato.setText(contrato.getIdContrato() + " ");
                 //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-                DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-                LocalDate ld=LocalDate.parse(contrato.getFechaInicio(), dt);
+                //DateTimeFormatter dt= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+                LocalDateTime ld=LocalDateTime.parse(contrato.getFechaInicio());
+                LocalDate fff = ld.toLocalDate();
+                tvFechaInicio.setText(fff.toString());
 
-                tvFechaInicio.setText(ld.toString());
 
 
-
-                LocalDate ld2=LocalDate.parse(contrato.getFechaFin(), dt);
-                tvFechaFin.setText(ld2.toString());
+                LocalDateTime ld2=LocalDateTime.parse(contrato.getFechaFin());
+                LocalDate fff2 = ld2.toLocalDate();
+                tvFechaFin.setText(fff2.toString());
 
                 tvMontoAlquiler.setText("$" + contrato.getMontoAlquiler());
                 //tvInquilino.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());

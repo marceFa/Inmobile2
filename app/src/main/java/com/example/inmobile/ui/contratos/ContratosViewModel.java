@@ -59,7 +59,7 @@ public class ContratosViewModel extends AndroidViewModel {
                     inmueblesMutable.postValue(response.body());
 
                 }else{
-                    Toast.makeText(context, "Sin respuesta", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "No hay contratos Vigentes", Toast.LENGTH_LONG).show();
                 }
             }
 

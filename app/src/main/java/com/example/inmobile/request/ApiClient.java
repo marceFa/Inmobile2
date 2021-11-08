@@ -155,7 +155,7 @@ public Propietario login(String mail, final String clave){
         propietarios.add(sonia);
 
         //Inquilinos
-        Inquilino mario=new Inquilino(100,25340691,"Mario","Luna","Aiello sup.","luna@mail.com","2664253411","Lucero Roberto","2664851422");
+        Inquilino mario=new Inquilino(100,25340691,"Mario","Luna","Aiello sup.","2664253411","Lucero Roberto","2664851422");
         inquilinos.add(mario);
 
         //Inmuebles
@@ -212,8 +212,8 @@ public Propietario login(String mail, final String clave){
         @GET("Propietarios")
         Call<Propietario> propietarioActual (@Header("Authorization") String token);
 
-        @PUT("Propietarios/{id}")
-        Call<Propietario> actualizarPropietario(@Body Propietario propietario, @Path("id") int groupId, @Header("Authorization") String token );
+        @PUT("Propietarios/editar")
+        Call<Propietario> actualizarPropietario(@Header("Authorization") String token,@Body Propietario propietario);
 
         //Inmuebles
         @GET("Inmuebles")
@@ -229,10 +229,13 @@ public Propietario login(String mail, final String clave){
         @GET("Contratos/Vigentes")
         Call<List<Contrato>>contratosVigentes(@Header("Authorization")String token);
 
+        //INQUILINOS VER SI LOS PUEDO MOSTRAR SINO SACARLO
+        @GET("Contratos/vigente/{id}")
+        Call<Inquilino>inquilinoPorContrato(@Path("id") int id, @Header("Authorization") String token);
 
-        //Pagos
+        //Pagos     MUESTRA VACIO EL DETALLE
         @GET("Pago/{id}")
-        Call<List<Pago>> pagosPorcontrato(@Path("id") int id,@Header("Authorization") String token);
+        Call<List<Pago>>pagosPorcontrato(@Path("id") int id, @Header("Authorization") String token);
 
 
 

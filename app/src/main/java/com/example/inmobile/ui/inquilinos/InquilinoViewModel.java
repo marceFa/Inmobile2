@@ -10,10 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.inmobile.modelo.Contrato;
-import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Inquilino;
 import com.example.inmobile.request.ApiClient;
 
@@ -21,25 +19,48 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InquilinoViewModel extends ViewModel {
-
+public class InquilinoViewModel extends AndroidViewModel {
+    private Context context;
     private MutableLiveData<Inquilino> inquilinoMutable;
 
-    public InquilinoViewModel() {
-        super();
+    public InquilinoViewModel(@NonNull Application application)
+    {
+        super(application);
+        context = application.getApplicationContext();
     }
 
     public LiveData<Inquilino> getInquilino() {
         if (inquilinoMutable == null) {
-            inquilinoMutable = new MutableLiveData<>();
+            inquilinoMutable = new MutableLiveData<Inquilino>();
         }
         return inquilinoMutable;
     }
 
     ////Acá recibimos un inmueble  y buscamos en la ApiClient el contrato vigente de ese inmueble y su inquilino
-    public void cargarInquilino(Bundle bundle) {
+    public void cargarInquilino(int id) {
+        Log.d("id","el id"+id);
+        Call<Inquilino> respuestaToken = ApiClient.getMyApiClient().inquilinoPorContrato(id, ApiClient.obtenerToken(context));
+        respuestaToken.enqueue(new Callback<Inquilino>() {
+            @Override
+            public void onResponse(Call<Inquilino> call, Response<Inquilino> response) {
+                if(response.isSuccessful()){
+                    inquilinoMutable.postValue(response.body());
+                }
+                else{
+                    Log.d("response","error: "+response.message());
+                    Toast.makeText(context, "Inquilino no encontrado", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        //Inquilino inquilino = (Inquilino) bundle.get("Contrato");
+            @Override
+            public void onFailure(Call<Inquilino> call, Throwable t) {
+                Log.d("inquilino","error: "+t.getMessage());
+                Toast.makeText(context, "Ocurrio un error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         //ApiClient apiClient= ApiClient.getApi();
         //Inquilino inquilino = apiClient.obtenerInquilino(inmueble);
         //this.inquilinoMutable.setValue(inquilino);

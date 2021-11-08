@@ -56,6 +56,7 @@ public class PagosViewModel  extends AndroidViewModel{
                     }
                     inmueblesMutable.postValue(response.body());
                 }else{
+                    Toast.makeText(context, "No hay Pagos realizados", Toast.LENGTH_LONG).show();
                     Log.d("else","no paso");
                 }
             }
@@ -63,7 +64,7 @@ public class PagosViewModel  extends AndroidViewModel{
             public void onFailure(Call<List<Contrato>> call, Throwable t) {
                 Log.d("Error ",t.getMessage());
 
-                Toast.makeText(context, "Ha ocurrido un error.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Ha ocurrido un error!!! ", Toast.LENGTH_SHORT).show();
             }
         });
 

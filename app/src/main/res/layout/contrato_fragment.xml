@@ -85,7 +85,7 @@
             android:id="@+id/textView31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inquilino"
+            android:text="Ubicacion Inmueble"
             android:textColor="#040303"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
@@ -93,10 +93,10 @@
             app:layout_constraintVertical_bias="0.1" />
 
         <TextView
-            android:id="@+id/tvInmueble"
+            android:id="@+id/tvInquilino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tvInmueble"
+            android:text="tvInquilino"
             android:textColor="#0421BF"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -105,10 +105,10 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/tvInquilino"
+            android:id="@+id/tvInmueble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" "
+            android:text="tvInmueble "
             android:textColor="#0421BF"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -131,7 +131,6 @@
             android:id="@+id/Inmueble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubicacion Inmueble"
             android:textColor="#070707"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"

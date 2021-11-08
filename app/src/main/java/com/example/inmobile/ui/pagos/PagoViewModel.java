@@ -2,6 +2,7 @@ package com.example.inmobile.ui.pagos;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,7 @@ public class PagoViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Pago>> call, Response<List<Pago>> response) {
                 if(response.isSuccessful()){
                     pagosMutable.postValue(response.body());
-                    // Log.d("Pago", response.body().get(1).getNumPago()+" ");
+                    Log.d("Pago", response.body().get(1).getNumero()+" ");
                 }else{
                     Toast.makeText(context, "Pagos no encontrados", Toast.LENGTH_LONG).show();
                 }

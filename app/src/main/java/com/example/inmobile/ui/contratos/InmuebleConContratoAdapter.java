@@ -79,8 +79,8 @@ public class InmuebleConContratoAdapter extends RecyclerView.Adapter<InmuebleCon
                     Bundle bundle = new Bundle();
                     Contrato contrato = contratos.get(getAdapterPosition());
                     //bundle.putInt("id", contrato.getIdContrato());
-                    //bundle.putSerializable("id", contrato.getIdContrato());
                     bundle.putSerializable("Contrato", contrato);
+                    //bundle.putSerializable("id", contrato);
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.contratoFragment, bundle);
                 }
             });

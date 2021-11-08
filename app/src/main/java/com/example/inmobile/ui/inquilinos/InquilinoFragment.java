@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inquilino;
 
 public class InquilinoFragment extends Fragment {
@@ -21,14 +22,17 @@ public class InquilinoFragment extends Fragment {
     private TextView tvNombre;
     private TextView tvApellido;
     private TextView tvDNI;
-    private TextView tvEmail;
     private TextView tvTelefono;
+    private TextView tvEmail;
     private TextView tvGarante;
     private TextView tvTelefonoGarante;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        //int id =getArguments().getInt("id");
+
         View root = inflater.inflate(R.layout.inquilino_fragment, container, false);
         inicializar(root);
         return root;
@@ -39,11 +43,11 @@ public class InquilinoFragment extends Fragment {
         tvNombre = view.findViewById(R.id.tvNombre);
         tvApellido = view.findViewById(R.id.tvApellido);
         tvDNI = view.findViewById(R.id.tvDNI);
-        tvEmail = view.findViewById(R.id.tvEmail);
         tvTelefono = view.findViewById(R.id.tvTelefono);
+        tvEmail = view.findViewById(R.id.tvEmail);
         tvGarante = view.findViewById(R.id.tvGarante);
         tvTelefonoGarante = view.findViewById(R.id.tvTelefonoGarante);
-
+        int id =getArguments().getInt("id");
 
         inquilinoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinoViewModel.class);
         inquilinoViewModel.getInquilino().observe(getViewLifecycleOwner(), new Observer<Inquilino>() {
@@ -53,15 +57,15 @@ public class InquilinoFragment extends Fragment {
                 tvCodigo.setText(inquilino.getIdInquilino() + "");
                 tvNombre.setText(inquilino.getNombre());
                 tvApellido.setText(inquilino.getApellido());
-                tvDNI.setText(inquilino.getDNI()+ "");
-                tvEmail.setText(inquilino.getEmail());
-                tvTelefono.setText(inquilino.getTelefono());
+                tvDNI.setText(inquilino.getDNI() + "");
+                tvTelefono.setText(inquilino.getTelefono() + "");
+                tvEmail.setText(inquilino.getLugarDeTrabajo());
                 tvGarante.setText(inquilino.getNombreGarante());
-                tvTelefonoGarante.setText(inquilino.getTelefonoGarante());
+                tvTelefonoGarante.setText(inquilino.getTelefonoGarante() + "");
 
         }
     });
-        inquilinoViewModel.cargarInquilino(getArguments());
+        inquilinoViewModel.cargarInquilino(id);
 
 
 

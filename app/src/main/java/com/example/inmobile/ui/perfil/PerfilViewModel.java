@@ -103,8 +103,7 @@ public class PerfilViewModel extends AndroidViewModel {
 
     public void actualizarPerfil(Propietario propietario){
 
-        Log.d("id","mi id"+propietario.getId());
-        Call<Propietario> respuestaToken = ApiClient.getMyApiClient().actualizarPropietario(propietario,propietario.getId(),ApiClient.obtenerToken(context));
+        Call<Propietario> respuestaToken = ApiClient.getMyApiClient().actualizarPropietario(ApiClient.obtenerToken(context), propietario);
         respuestaToken.enqueue(new Callback<Propietario>() {
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
